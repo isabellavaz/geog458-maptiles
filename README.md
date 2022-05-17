@@ -1,1 +1,2 @@
-# geog458-maptiles
+# GEOG458-maptiles geonarrative
+Isabella Vazquez
