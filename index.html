@@ -1,60 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>San Diego transit - LeafLet Preview</title>
-    <meta charset="utf-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <title>Southern California Traffic Web Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css" rel="stylesheet">
 
-    <link
-      rel="stylesheet"
-      href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css"
-    />
-    <link
-      href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <style type="text/css">
-      #basemapslidercontainer {
-        position: absolute;
-        top: 50px;
-        right: 10px;
-        z-index: 1000;
-      }
-
-      #basemapslider {
-        font-size: 62.5%;
-        margin: 14px;
-        height: 125px;
-        width: 7px;
-      }
-
-      body {
+    <style>
+        body {
             margin: 0;
             padding: 0;
-        }
-
-        .map-overlay {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          background: rgba(255, 255, 255, 0.8);
-          border-style: solid;
-          border-width: 1px;
-          border-color: rgba(0, 0, 0, 0.2);
-          margin-left: 20px;
-          font-family: Arial, sans-serif;
-          overflow: auto;
-          border-radius: 3px;
-        }
-
-        #features {
-            top: 0;
-            height: 100px;
-            margin-top: 20px;
-            width: 300px;
         }
 
         #map {
@@ -62,6 +18,36 @@
             top: 0;
             bottom: 0;
             width: 100%;
+        }
+
+        #title {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-top: 20px;
+            margin-left: 20px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 25pt;
+            color: black;
+            background:#D3D3D3;
+            padding: 20px;
+            opacity: 0.6;
+            border-radius: 10px;
+        }
+
+        .summary {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            margin-bottom: 40px;
+            margin-left: 20px;
+            font-family: 'Open Sans', sans-serif;
+            color: black;
+            background:#D3D3D3;
+            padding: 20px;
+            opacity: 0.6;
+            border-radius: 10px;
+            max-width: 300px;
         }
 
         /* the style of the layer control menu */
@@ -102,73 +88,123 @@
         }
 
         #menu a.active {
-            background-color: #3887be;
+            background-color: #404040;
             color: #ffffff;
         }
 
         #menu a.active:hover {
-            background: #3074a4;
+            background: gray;
         }
     </style>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <nav id="menu"></nav>
-    <div id="map">
-      <div id="basemapslidercontainer">
-        <div id="basemapslider"></div>
-      </div>
-    </div>
-    <div class='map-overlay' id='features'>
-      <h3>Map Tiles</h3>
-      <div id='text-description'>
-          <small>Explore different map layers in the San Digeo area.</small>
-      </div>
-  </div>
-    <script>
-            mapboxgl.accessToken =
+    <div id="map"></div>
+    <div id="title">Southern California, USA - Web Map Using Mapbox Tiles</div>
+    <div class="summary">This web map displays various map tiles around the Southern California. Tiles can be selected in the menu at the top right.</div>
+    <script type="text/javascript">
+        mapboxgl.accessToken =
             'pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw';
-      let map = new mapboxgl.Map({
-          container: 'map', // container ID
-          style: 'mapbox://styles/mapbox/streets-vll',
-          zoom: 12, // starting zoom
-          center: [-117.12413798783813, 32.82885495873731] // starting center
-      });
-
-      map.on("load", () => {
-        map.addSource("transit", {
-          type: "raster",
-          tiles: ["http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"],
-          tileSize: 256,
-          attribution: "Map tiles designed by Isabella Vazquez</a>",
+        let map = new mapboxgl.Map({
+            container: 'map', // container ID
+            style: 'mapbox://styles/mapbox/dark-v10',
+            zoom: 14, // starting zoom
+            center: [33.09157079588717, -116.98816122435763] // starting center
         });
 
-        map.addLayer({
-          id: "transit-layer",
-          type: "raster",
-          layout: {
-            visibility: "none",
-          },
-          source: "transit",
-        });
-      });
+        // load the map
+        map.on('load', () => {
 
-      map.on('idle', () => {
+            // add sources and layers to the map
+            map.addSource('tile-1', {
+                'type': 'raster',
+                'tiles': [
+                    'assets/tiles/basemap/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Map tiles designed by Isabella Vazquez'
+            });
+
+            map.addSource('tile-2', {
+                'type': 'raster',
+                'tiles': [
+                    'assets/tiles/traffic/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Map tiles designed by Isabella Vazquez'
+            });
+
+            map.addSource('tile-3', {
+                'type': 'raster',
+                'tiles': [
+                    'assets/tiles/highways/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Map tiles designed by Isabella Vazquez'
+            });
+
+            map.addSource('tile-4', {
+                'type': 'raster',
+                'tiles': [
+                    'assets/satellite/{z}/{x}/{y}.png'
+                ],
+                'tileSize': 256,
+                'attribution': 'Map tiles designed by Isabella Vazquez'
+            });
+
+            map.addLayer({
+                'id': 'Base Layer',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'source': 'tile-1'
+            });
+
+            map.addLayer({
+                'id': 'Traffic',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'source': 'tile-2'
+            });
+
+            map.addLayer({
+                'id': 'Base Layer and Highways',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'source': 'tile-3'
+            });
+
+            map.addLayer({
+                'id': 'Satellite',
+                'type': 'raster',
+                'layout': {
+                    'visibility': 'none'
+                },
+                'source': 'tile-4'
+            });
+
+        });
+
+
+        map.on('idle', () => {
             // If these two layers were not added to the map, abort
-            if (!map.getLayer('Basemap')) {
+            if (!map.getLayer('Base Layer') || !map.getLayer('Traffic') || !map.getLayer('Base Layer and Highways') || !map.getLayer('Satellite')) {
                 return;
             }
 
-            // Enumerate ids of the layers.
-            const toggleableLayerIds = ['Basemap'];
+            // Enumerate ids of the layers
+            const toggleableLayerIds = ['Base Layer', 'Traffic', 'Base Layer and Highways', 'Satellite'];
 
-            // Set up the corresponding toggle button for each layer.
+            // Set up the corresponding toggle button for each layer
             for (const id of toggleableLayerIds) {
-                // Skip layers that already have a button set up.
+                // Skip layers that already have a button set up
                 if (document.getElementById(id)) {
                     continue;
                 }
@@ -210,14 +246,14 @@
                             'visible'
                         );
                     }
-            };
+                };
 
                 // in the menu place holder, insert the layer links.
                 const layers = document.getElementById('menu');
                 layers.appendChild(link);
             }
-      });
-      
-      </script>
-  </body>
+        });
+    </script>
+</body>
+
 </html>
