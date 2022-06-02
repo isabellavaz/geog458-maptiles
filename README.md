@@ -30,7 +30,7 @@ Traffic Variable - Percentile of Traffic density, in vehicle-kilometers per hour
 
 ## Satellite View
 
-![Nature](screenshots/satellite.png "Screenshot of satellite view")
+![Satellite](img/satellite.png "Screenshot of satellite view")
 
 The satellite view with bright red indicating the highway system offers the viewer a glimpse of scenery and an 
 understanding of the stark differences. 
