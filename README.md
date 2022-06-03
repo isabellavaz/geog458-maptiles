@@ -8,24 +8,27 @@ Traffic Variable - Percentile of Traffic density, in vehicle-kilometers per hour
 
 ## Map URL
 
-[Web Map]()
+[Web Map](https://isabellavaz.github.io/geog458-maptiles/)
 
 ## Basemap
 
 ![Basemap](img/basemap.png "Screenshot of basemap")
-
+Geographic Area: Los Angeles, CA
+Available Zoom Levels: 1-13
 
 
 ## Highways
 
 ![Highways](img/highways.png "Screenshot of highway layer")
-
+Geographic Area: Los Angeles, CA
+Available Zoom Levels: 1-13
 
 
 ## Traffic
 
 ![Modified Basemap + Traffic](img/traffic.png "Screenshot of basemap with highway layer")
-
+Geographic Area: Los Angeles, CA
+Available Zoom Levels: 1-13
 
 
 ## Satellite View
@@ -34,7 +37,8 @@ Traffic Variable - Percentile of Traffic density, in vehicle-kilometers per hour
 
 The satellite view with bright red indicating the highway system offers the viewer a glimpse of scenery and an 
 understanding of the stark differences. 
-
+Geographic Area: Los Angeles, CA
+Available Zoom Levels: 1-13
 
 ---
 
