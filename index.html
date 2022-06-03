@@ -217,7 +217,7 @@
 
         map.on('idle', () => {
             // If these two layers were not added to the map, abort
-            if (!map.getLayer('Base Layer') || !map.getLayer('Traffic') || !map.getLayer('Base Layer and Highways') || !map.getLayer('Satellite')) {
+            if (!map.getLayer('tile-1') || !map.getLayer('tile-2') || !map.getLayer('tile-3') || !map.getLayer('tile-4')) {
                 return;
             }
 
