@@ -34,6 +34,18 @@
             opacity: 0.6;
             border-radius: 10px;
         }
+        
+        #menu {
+            background: #fff;
+            position: absolute;
+            z-index: 1;
+            top: 10px;
+            right: 10px;
+            border-radius: 3px;
+            width: 120px;
+            border: 1px solid rgba(0, 0, 0, 0.4);
+            font-family: 'Open Sans', sans-serif;
+        }
 
         .map-overlay {
           position: absolute;
@@ -120,7 +132,7 @@
         let map = new mapboxgl.Map({
             container: 'map', // container ID
             style: 'mapbox://styles/mapbox/dark-v10',
-            zoom: 10, // starting zoom
+            zoom: 12, // starting zoom
             center: [33.09157079588717, -116.98816122435763] // starting center
         });
 
