@@ -177,7 +177,7 @@
             });
 
             map.addLayer({
-                'id': 'Base Layer',
+                'id': 'basemap',
                 'type': 'raster',
                 'layout': {
                     'visibility': 'none'
@@ -186,7 +186,7 @@
             });
 
             map.addLayer({
-                'id': 'Traffic',
+                'id': 'traffic',
                 'type': 'raster',
                 'layout': {
                     'visibility': 'none'
@@ -195,7 +195,7 @@
             });
 
             map.addLayer({
-                'id': 'Base Layer and Highways',
+                'id': 'highways',
                 'type': 'raster',
                 'layout': {
                     'visibility': 'none'
@@ -204,7 +204,7 @@
             });
 
             map.addLayer({
-                'id': 'Satellite',
+                'id': 'satellite',
                 'type': 'raster',
                 'layout': {
                     'visibility': 'none'
@@ -217,12 +217,12 @@
 
         map.on('idle', () => {
             // If these two layers were not added to the map, abort
-            if (!map.getLayer('tile-1') || !map.getLayer('tile-2') || !map.getLayer('tile-3') || !map.getLayer('tile-4')) {
+            if (!map.getLayer('basemap') || !map.getLayer('traffic') || !map.getLayer('highways') || !map.getLayer('satellite')) {
                 return;
             }
 
             // Enumerate ids of the layers
-            const toggleableLayerIds = ['tile-1', 'tile-2', 'tile-3', 'tile-4'];
+            const toggleableLayerIds = ['basemap', 'traffic', 'highways', 'satellite'];
 
             // Set up the corresponding toggle button for each layer
             for (const id of toggleableLayerIds) {
